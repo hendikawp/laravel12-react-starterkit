@@ -9,6 +9,7 @@ use App\Http\Controllers\BackupController;
 use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\SettingAppController;
+use App\Http\Controllers\PaketPemotretanController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -32,6 +33,10 @@ Route::middleware(['auth', 'menu.permission'])->group(function () {
     Route::post('/backup/run', [BackupController::class, 'run'])->name('backup.run');
     Route::get('/backup/download/{file}', [BackupController::class, 'download'])->name('backup.download');
     Route::delete('/backup/delete/{file}', [BackupController::class, 'delete'])->name('backup.delete');
+    Route::get('/paket', [PaketPemotretanController::class, 'index'])->name('paket.index');
+    Route::post('/paket', [PaketPemotretanController::class, 'store'])->name('paket.store');
+    Route::put('/paket/{paket}', [PaketPemotretanController::class, 'update'])->name('paket.update');
+    Route::delete('/paket/{paket}', [PaketPemotretanController::class, 'destroy'])->name('paket.destroy');
 });
 
 require __DIR__ . '/settings.php';
